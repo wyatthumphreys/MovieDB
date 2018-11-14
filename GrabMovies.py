@@ -1,12 +1,13 @@
 import os, sqlite3, http.client
 
-conn = http.client.HTTPSConnection("api.themoviedb.org")
+
+connect = http.client.HTTPSConnection("api.themoviedb.org")
 
 payload = "{}"
 
-conn.request("GET", "/3/movie/%7Bmovie_id%7D/release_dates?api_key=%3C%3Capi_key%3E%3E", payload)
+connect.request("GET", "/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=INSERTAPIKEYHERE", payload)
 
-res = conn.getresponse()
+res = connect.getresponse()
 data = res.read()
 
 print(data)
