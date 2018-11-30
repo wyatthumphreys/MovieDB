@@ -9,9 +9,10 @@ import time
 
 conn = mysql.connector.connect(user='root', password='',
                                   host='127.0.0.1',
-                                  database='MovieDB')
+                                  database='MovieDB',
+                               buffered = True)
 cursor = conn.cursor()
-cursor.execute('''CREATE TABLE IF NOT EXISTS Movies (id INT PRIMARY KEY AUTO_INCREMENT, Vote_Average TEXT, Title TEXT, Release_Date TEXT, Description TEXT); ''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS Movies (id INT PRIMARY KEY AUTO_INCREMENT, Vote_Average TEXT, Title TEXT, Release_Date TEXT, Overview TEXT); ''')
 
 query = "https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=6a16db157e43a17b6576a257990c575f"
 jsonpage = 0
@@ -19,12 +20,18 @@ contents = urllib.request.urlopen(query)
 response = contents.read()
 jsonpage = json.loads(response)
 for i in jsonpage['results']:
-    print(i['title'])
-    cursor.execute('''INSERT INTO Movies (Vote_Average, Title, Release_Date, Description) VALUES (
-    "''' + i['vote_average'] + '''",
-    "''' + i['title'] + '''",
-    "''' + i['release_date'] + '''",
-    "''' + i['description'] + '''")''')
+    title = i['title']
+    cursor.execute("SELECT Title FROM Movies WHERE Title = '" + title + "';")
+    test = cursor.rowcount
+    if test != 1:
+        cursor.execute('''INSERT INTO Movies (Vote_Average, Title, Release_Date, Overview) VALUES (
+        "''' + str(i['vote_average']) + '''",
+        "''' + i['title'] + '''",
+        "''' + i['release_date'] + '''",
+        "''' + i['overview'] + '''")''')
+
+    else:
+        continue
 
 #GENRE LIST
 #b'{"id":28,"name":"Action"}' \
