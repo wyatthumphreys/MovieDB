@@ -14,7 +14,7 @@ conn = mysql.connector.connect(user='root', password='',
 cursor = conn.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS Movies (id INT PRIMARY KEY AUTO_INCREMENT, Vote_Average TEXT, Title TEXT, Release_Date TEXT, Overview TEXT); ''')
 
-query = "https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=6a16db157e43a17b6576a257990c575f"
+query = "https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=INSERTAPIKEY"
 jsonpage = 0
 contents = urllib.request.urlopen(query)
 response = contents.read()
