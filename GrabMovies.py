@@ -10,7 +10,7 @@ connect = http.client.HTTPSConnection("api.themoviedb.org")
 
 payload = "{}"
 
-connect.request("GET", "/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=6a16db157e43a17b6576a257990c575f", payload)
+connect.request("GET", "/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=INSERTAPIKEY", payload)
 
 #GET GENRES BELOW
 #connect.request("GET", "/3/genre/movie/list?language=en-US&api_key=INSERTAPIKEYHERE", payload)
