@@ -53,3 +53,9 @@ for i in jsonpage['results']:
 #'{"id":53,"name":"Thriller"}' \
 #'{"id":10752,"name":"War"}' \
 #'{"id":37,"name":"Western"}]}'
+
+
+
+#Q1 = input("Looking for a bad movie, a good movie, or a great movie? Bad = 0, Good = 1, Great = 2 ")
+#if Q1 == 0:
+    #Q1Bad = cursor.execute('''SELECT * FROM Movies WHERE vote_average<=5.9;''')
