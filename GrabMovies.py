@@ -14,7 +14,7 @@ conn = mysql.connector.connect(user='root', password='',
 cursor = conn.cursor()
 cursor.execute('''CREATE TABLE IF NOT EXISTS Movies (id INT PRIMARY KEY AUTO_INCREMENT, Vote_Average TEXT, Title TEXT, Release_Date TEXT, Overview TEXT); ''')
 
-query = "https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key=INSERTAPIKEY"
+query = "https://api.themoviedb.org/3/discover/movie?page=1&include_video=false&include_adult=false&sort_by=popularity.desc&language=en-US&api_key="
 jsonpage = 0
 contents = urllib.request.urlopen(query)
 response = contents.read()
@@ -55,7 +55,15 @@ for i in jsonpage['results']:
 #'{"id":37,"name":"Western"}]}'
 
 
-
-#Q1 = input("Looking for a bad movie, a good movie, or a great movie? Bad = 0, Good = 1, Great = 2 ")
-#if Q1 == 0:
-    #Q1Bad = cursor.execute('''SELECT * FROM Movies WHERE vote_average<=5.9;''')
+Q1Bad = cursor.execute("SELECT * FROM Movies WHERE vote_average<=5.9;")
+Q1Good = cursor.execute("SELECT * FROM Movies WHERE vote_average>=6.0 && vote_average<=7.0;")
+Q1Great = cursor.execute("SELECT * FROM Movies WHERE vote_average>=7.1;")
+Q1 = input("Looking for a bad movie, a good movie, or a great movie? Bad = 0, Good = 1, Great = 2 ")
+if Q1 == "0":
+    print("You will be shown bad movies: " + Q1Bad)
+elif Q1 == "1":
+    print("You will be shown good movies: " + Q1Good)
+elif Q1 == "2":
+    print("You will be shown great movies: " + Q1Great)
+else:
+    print("Because your input was invalid, you will be shown Great movies:  " + Q1Great)
