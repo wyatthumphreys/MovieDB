@@ -55,15 +55,27 @@ for i in jsonpage['results']:
 #'{"id":37,"name":"Western"}]}'
 
 
-Q1Bad = cursor.execute("SELECT * FROM Movies WHERE vote_average<=5.9;")
-Q1Good = cursor.execute("SELECT * FROM Movies WHERE vote_average>=6.0 && vote_average<=7.0;")
-Q1Great = cursor.execute("SELECT * FROM Movies WHERE vote_average>=7.1;")
+cursor.execute("SELECT Title,vote_average FROM Movies WHERE vote_average<=5.9;")
+Q1Bad = cursor.fetchall()
+cursor.execute("SELECT Title,vote_average FROM Movies WHERE vote_average>=6.0 && vote_average<=7.0;")
+Q1Good = cursor.fetchall()
+cursor.execute("SELECT Title,vote_average FROM Movies WHERE vote_average>=7.1;")
+Q1Great = cursor.fetchall()
+
 Q1 = input("Looking for a bad movie, a good movie, or a great movie? Bad = 0, Good = 1, Great = 2 ")
 if Q1 == "0":
-    print("You will be shown bad movies: " + Q1Bad)
+    print("You will be shown bad movies: ")
+    for x in Q1Bad:
+        print(x)
 elif Q1 == "1":
-    print("You will be shown good movies: " + Q1Good)
+    print("You will be shown good movies: ")
+    for x in Q1Good:
+        print(x)
 elif Q1 == "2":
-    print("You will be shown great movies: " + Q1Great)
+    print("You will be shown great movies: ")
+    for x in Q1Great:
+        print(x)
 else:
-    print("Because your input was invalid, you will be shown Great movies:  " + Q1Great)
+    print("Because your input was invalid, you will be shown Great movies:  ")
+    for x in Q1Great:
+        print(x)
