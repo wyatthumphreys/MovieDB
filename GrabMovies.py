@@ -1,3 +1,5 @@
+#Wyatt Humphreys | wlhumphreys@student.rtc.edu
+#12/6/18 This program grabs data from themoviedb, puts it into a SQL database, and asks what kind of movies you want to watch
 #SOURCES: https://stackoverflow.com/questions/42445237/looping-through-a-json-array-in-python
 import mysql.connector
 import sys
